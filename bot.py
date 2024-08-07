@@ -26,10 +26,10 @@ def execute_command(command):
         stdin, stdout, stderr = ssh_client.exec_command(full_command)
         output = stdout.read().decode() + stderr.read().decode()
         if len(output) > 4000:
-            output = '*😿 Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ, извини(((*'
+            output = '😿 Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ, извини((('
         elif not output.strip():
             output = '✅'
-        output = f'*🐱 Котик тебе ответил:*\n{output}'
+        output = f'🐱 Котик тебе ответил:\n{output}'
     finally:
         ssh_client.close()
     return output
@@ -61,7 +61,7 @@ def handle_message(message):
 
     command = message.text
     output = execute_command(command)
-    bot.reply_to(message, output, parse_mode='Markdown')
+    bot.reply_to(message, output)
 
 @bot.inline_handler(lambda query: True)
 def handle_inline_query(inline_query):
