@@ -26,7 +26,7 @@ def execute_command(command):
         stdin, stdout, stderr = ssh_client.exec_command(full_command)
         pidoras = stdout.read().decode() + stderr.read().decode()
 
-        if len(output) > 4000:
+        if len(pidoras) > 4000:
             output = '😿 *Хозяин, из-за дурацких лимитов тг я не могу отправить тебе ответ, извини(((*'
             return output, 'Markdown'
 
