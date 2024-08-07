@@ -58,7 +58,7 @@ def handle_message(message):
 
     command = message.text
     output = execute_command(command)
-    bot.reply_to(message, output)
+    bot.reply_to(message, output, parse_mode='Markdown')
 
 @bot.inline_handler(lambda query: True)
 def handle_inline_query(inline_query):
@@ -72,13 +72,12 @@ def handle_inline_query(inline_query):
 
     if query_text:
         output = execute_command(query_text)
-        photo_url = 'https://i.imgur.com/bTky2NE.jpeg'  
-        results.append(types.InlineQueryResultPhoto(
+        results.append(types.InlineQueryResultArticle(
             id='1',
-            photo_url=photo_url,
-            thumbnail_url=photo_url,
-            title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ.',
-            description='😽 Отправить команду котику.'
+            title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ',
+            input_message_content=types.InputTextMessageContent(output),
+            description='😽 Отправить команду котику.',
+            thumb_url='https://i.imgur.com/bTky2NE.jpeg'
         ))
 
     bot.answer_inline_query(inline_query.id, results)
