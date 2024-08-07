@@ -72,14 +72,15 @@ def handle_inline_query(inline_query):
 
     if query_text:
         output = execute_command(query_text)
+        photo_url = 'https://i.imgur.com/bTky2NE.jpeg'  
         results.append(types.InlineQueryResultPhoto(
             id='1',
-            photo_url='cat.png',
-            thumbnail_url='cat.png',
+            photo_url=photo_url,
+            thumb_url=photo_url,
             title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ.',
             description='😽 Отправить команду котику.'
         ))
 
     bot.answer_inline_query(inline_query.id, results)
-
+    
 bot.polling(none_stop=True)
