@@ -27,15 +27,17 @@ def execute_command(command):
         pidoras = stdout.read().decode() + stderr.read().decode()
 
         if len(pidoras) > 4000:
-            output = '😿 *Хозяин, из-за дурацких лимитов тг я не могу отправить тебе ответ, извини(((*'
-            return output, 'Markdown'
+            output = '😿 *Хозяин, из-за дурацких лимитов тг я не смогу отправить тебе ответ, извини(((*'
+            bot.reply_to(message, output, parse_mode='Markdown')
+            return
 
         elif not pidoras.strip():
             output = '✅'
+            bot.reply_to(message, output, parse_mode='Markdown')
         else:
             output = f'🐱 *Котик тебе ответил:*\n{pidoras}'
-        
-        return output, 'Markdown'
+            bot.reply_to(message, output, parse_mode='Markdown')
+        return
     
     finally:
         ssh_client.close()
@@ -67,7 +69,6 @@ def handle_message(message):
 
     command = message.text
     output = execute_command(command)
-    bot.reply_to(message, output)
 
 @bot.inline_handler(lambda query: True)
 def handle_inline_query(inline_query):
