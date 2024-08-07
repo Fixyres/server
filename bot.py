@@ -26,10 +26,10 @@ def execute_command(command):
         stdin, stdout, stderr = ssh_client.exec_command(full_command)
         output = stdout.read().decode() + stderr.read().decode()
         if len(output) > 4000:
-            output = '😿 *Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ, извини(((*', parse_mode='Markdown'
+            output = ('😿 *Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ, извини(((*', parse_mode='Markdown')
         elif not output.strip():
             output = '✅'
-        output = f'🐱 *Котик тебе ответил:*\n', parse_mode='Markdown' + {output}
+        output = (f'🐱 *Котик тебе ответил:*\n', parse_mode='Markdown' + {output})
     finally:
         ssh_client.close()
     return output
