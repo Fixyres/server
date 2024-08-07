@@ -77,7 +77,8 @@ def handle_inline_query(inline_query):
             photo_url='cat.png',
             thumbnail_url='cat.png',
             title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ.',
-            description='😽 Отправить команду котику.'
+            description='😽 Отправить команду котику.',
+            WEBDOCUMENT_URL_INVALID='cat.png'
         ))
 
     bot.answer_inline_query(inline_query.id, results)
