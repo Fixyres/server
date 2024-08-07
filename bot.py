@@ -3,7 +3,7 @@ import paramiko
 from telebot import types
 import os
 
-TOKEN = '7288710360:AAEZvqspDc56f2J9HiOSa6nB-_lLuD7zGcg'
+TOKEN = 'YOUR_BOT_TOKEN'
 SSH_HOST = 's2.serv00.com'
 SSH_PORT = 22
 SSH_USER = 'Foxy437'
@@ -25,18 +25,21 @@ def execute_command(command):
         full_command = f'clear; {command}'
         stdin, stdout, stderr = ssh_client.exec_command(full_command)
         output = stdout.read().decode() + stderr.read().decode()
-        if not output.strip():
+        if len(output) > 4000:
+            output = '**😿 Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ**'
+        elif not output.strip():
             output = '✅'
+        output = f'**🐱 Котик тебе ответил:**\n{output}'
     finally:
         ssh_client.close()
-    return f'🐱 Котик тебе ответил:\n{output}'
+    return output
 
 @bot.message_handler(commands=['start'])
 def start(message):
     user_id = message.from_user.id
     if user_id not in AUTHORIZED_USERS:
-        return None
-        
+        return
+
     photo_path = 'cat.png'
 
     if os.path.exists(photo_path):
@@ -44,21 +47,21 @@ def start(message):
             bot.send_photo(
                 message.chat.id,
                 photo,
-                caption='*Приветиккк мой хозяин* `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `',
+                caption='**Приветиккк мой хозяин** `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `',
                 parse_mode='Markdown'
             )
     else:
-        bot.send_message(message.chat.id, '*Приветиккк мой хозяин* `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `', parse_mode='Markdown')
+        bot.send_message(message.chat.id, '**Приветиккк мой хозяин** `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `', parse_mode='Markdown')
 
 @bot.message_handler(func=lambda m: True)
 def handle_message(message):
     user_id = message.from_user.id
     if user_id not in AUTHORIZED_USERS:
-        return None
+        return
 
     command = message.text
     output = execute_command(command)
-    bot.reply_to(message, output)
+    bot.reply_to(message, output, parse_mode='Markdown')
 
 @bot.inline_handler(lambda query: True)
 def handle_inline_query(inline_query):
@@ -70,15 +73,16 @@ def handle_inline_query(inline_query):
     query_text = inline_query.query
     results = []
 
-    if query_text:
-        output = execute_command(query_text)
-        results.append(types.InlineQueryResultArticle(
-            id='1',
-            title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ',
-            input_message_content=types.InputTextMessageContent(output),
-            description='😽 Отправить команду котику.',
-            thumbnail_url='https://i.imgur.com/bTky2NE.jpeg'
-        ))
+    if len(AUTHORIZED_USERS) == 1:
+        if query_text:
+            output = execute_command(query_text)
+            results.append(types.InlineQueryResultArticle(
+                id='1',
+                title='**🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ**',
+                input_message_content=types.InputTextMessageContent(output),
+                description='**😽 Отправить команду котику.**',
+                thumbnail_url='https://i.imgur.com/bTky2NE.jpeg'
+            ))
 
     bot.answer_inline_query(inline_query.id, results)
     
