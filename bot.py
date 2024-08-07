@@ -30,7 +30,7 @@ def execute_command(command):
             output = '😿 *Хозяин, из-за дурацких лимитов тг я не могу отправить тебе ответ, извини(((*'
             return output, 'Markdown'
 
-        elif not output.strip():
+        elif not pidoras.strip():
             output = '✅'
         else:
             output = f'🐱 *Котик тебе ответил:*\n{pidoras}'
