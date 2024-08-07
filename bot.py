@@ -74,6 +74,8 @@ def handle_inline_query(inline_query):
         output = execute_command(query_text)
         results.append(types.InlineQueryResultPhoto(
             id='1',
+            photo_url='cat.png',
+            thumbnail_url='cat.png',
             title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ.',
             description='😽 Отправить команду котику.'
         ))
