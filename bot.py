@@ -24,15 +24,21 @@ def execute_command(command):
     try:
         full_command = f'clear; {command}'
         stdin, stdout, stderr = ssh_client.exec_command(full_command)
-        output = stdout.read().decode() + stderr.read().decode()
+        pidoras = stdout.read().decode() + stderr.read().decode()
+
         if len(output) > 4000:
-            output = ('😿 *Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ, извини(((*', parse_mode='Markdown')
+            output = '😿 *Хозяин, из-за дурацких лимитов тг я не могу отправить тебе ответ, извини(((*'
+            return output, 'Markdown'
+
         elif not output.strip():
             output = '✅'
-        output = (f'🐱 *Котик тебе ответил:*\n', parse_mode='Markdown' + {output})
+        else:
+            output = f'🐱 *Котик тебе ответил:*\n{pidoras}'
+        
+        return output, 'Markdown'
+    
     finally:
         ssh_client.close()
-    return output
 
 @bot.message_handler(commands=['start'])
 def start(message):
