@@ -77,7 +77,7 @@ def handle_inline_query(inline_query):
             title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ',
             input_message_content=types.InputTextMessageContent(output),
             description='😽 Отправить команду котику.',
-            thumb_url='https://i.imgur.com/bTky2NE.jpeg'
+            thumbnail_url='https://i.imgur.com/bTky2NE.jpeg'
         ))
 
     bot.answer_inline_query(inline_query.id, results)
