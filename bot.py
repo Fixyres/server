@@ -26,10 +26,10 @@ def execute_command(command):
         stdin, stdout, stderr = ssh_client.exec_command(full_command)
         output = stdout.read().decode() + stderr.read().decode()
         if len(output) > 4000:
-            output = '**😿 Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ**'
+            output = '*😿 Хозяин, иза дурацких лимитов тг я не могу отправить тебе ответ, извини(((*'
         elif not output.strip():
             output = '✅'
-        output = f'**🐱 Котик тебе ответил:**\n{output}'
+        output = f'*🐱 Котик тебе ответил:*\n{output}'
     finally:
         ssh_client.close()
     return output
@@ -47,11 +47,11 @@ def start(message):
             bot.send_photo(
                 message.chat.id,
                 photo,
-                caption='**Приветиккк мой хозяин** `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `',
+                caption='*Приветиккк мой хозяин* `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `',
                 parse_mode='Markdown'
             )
     else:
-        bot.send_message(message.chat.id, '**Приветиккк мой хозяин** `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `', parse_mode='Markdown')
+        bot.send_message(message.chat.id, '*Приветиккк мой хозяин* `/⁠ᐠ⁠｡⁠ꞈ⁠｡⁠ᐟ⁠\ `', parse_mode='Markdown')
 
 @bot.message_handler(func=lambda m: True)
 def handle_message(message):
@@ -78,9 +78,9 @@ def handle_inline_query(inline_query):
             output = execute_command(query_text)
             results.append(types.InlineQueryResultArticle(
                 id='1',
-                title='**🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ**',
+                title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ',
                 input_message_content=types.InputTextMessageContent(output),
-                description='**😽 Отправить команду котику.**',
+                description='😽 Отправить команду котику.',
                 thumbnail_url='https://i.imgur.com/bTky2NE.jpeg'
             ))
 
