@@ -20,7 +20,7 @@ def get_ssh_client():
     return ssh_client
 
 @bot.message_handler(func=lambda m: True)
-def execute_command(message, command):
+def execute_command(command, message):
     ssh_client = get_ssh_client()
     try:
         full_command = f'clear; {command}'
