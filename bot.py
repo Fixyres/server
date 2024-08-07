@@ -1,8 +1,9 @@
 import telebot
 import paramiko
 from telebot import types
+import os
 
-TOKEN = '7218694009:AAG3KH-Z6SLzZsorYZkGZYvJ_UZ_tTGcoWg'
+TOKEN = '7288710360:AAEZvqspDc56f2J9HiOSa6nB-_lLuD7zGcg'
 SSH_HOST = 's2.serv00.com'
 SSH_PORT = 22
 SSH_USER = 'Foxy437'
