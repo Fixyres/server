@@ -29,7 +29,7 @@ def execute_command(command):
             output = '✅'
     finally:
         ssh_client.close()
-    return output
+    return f'**🐱 Котик тебе ответил:** {output}'
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -79,8 +79,6 @@ def handle_inline_query(inline_query):
             title='🐱 Отправить команду ฅ⁠^⁠•⁠ﻌ⁠•⁠^⁠ฅ.',
             description='😽 Отправить команду котику.'
         ))
-
-    bot.answer_inline_query(inline_query.id, results)
 
     bot.answer_inline_query(inline_query.id, results)
 
