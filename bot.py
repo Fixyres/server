@@ -19,7 +19,8 @@ def get_ssh_client():
     ssh_client.connect(SSH_HOST, port=SSH_PORT, username=SSH_USER, password=SSH_PASSWORD)
     return ssh_client
 
-def execute_command(command):
+@bot.message_handler(func=lambda m: True)
+def execute_command(message, command):
     ssh_client = get_ssh_client()
     try:
         full_command = f'clear; {command}'
