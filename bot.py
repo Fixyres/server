@@ -3,7 +3,7 @@ import paramiko
 from telebot import types
 import os
 
-TOKEN = 'YOUR_BOT_TOKEN'
+TOKEN = '7288710360:AAEZvqspDc56f2J9HiOSa6nB-_lLuD7zGcg'
 SSH_HOST = 's2.serv00.com'
 SSH_PORT = 22
 SSH_USER = 'Foxy437'
